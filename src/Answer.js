@@ -4,7 +4,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import _ from 'lodash'
 
 const Answer = (props) =>{
-
     
     return(
         <div className="col-5">

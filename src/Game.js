@@ -7,7 +7,8 @@ import Numbers from './Numbers';
 class Game extends React.Component{
 state = {
     selectedNumbers:[],
-    randomNoOfStar: 1+Math.floor(Math.random()*9)
+    randomNoOfStar: 1+Math.floor(Math.random()*9),
+    ansNumber : []
 };
 //1+Math.floor(Math.random()*9)
 selectNumber = (clickNumber) =>{
@@ -15,7 +16,8 @@ selectNumber = (clickNumber) =>{
     if(this.state.selectedNumbers.indexOf(clickNumber) < 0)
     {
         this.setState(prevState=>({
-            selectedNumbers : prevState.selectedNumbers.concat(clickNumber)
+            selectedNumbers : prevState.selectedNumbers.concat(clickNumber),
+            ansNumber : prevState.ansNumber.concat(clickNumber)
         }));
     }
 }
@@ -23,15 +25,15 @@ selectNumber = (clickNumber) =>{
  handleResult = ()=>{
     console.log('handleresult');
     let r = 0;
-    for (let index = 0; index < this.state.selectedNumbers.length; index++) {
-        r = r+this.state.selectedNumbers[index];
+    for (let index = 0; index < this.state.ansNumber.length; index++) {
+        r = r+this.state.ansNumber[index];
     }
     console.log(r);
     if (r == this.state.randomNoOfStar) {
         console.log('true');
         this.setState(()=>({
             randomNoOfStar : 1+Math.floor(Math.random()*9),
-            selectedNumbers:[]
+            ansNumber:[]
         }));
     }
 }
@@ -44,7 +46,7 @@ selectNumber = (clickNumber) =>{
                     <div className="row">
                         <Stars noOfStar={this.state.randomNoOfStar}/>
                         <Button selectedNumbers={this.state.selectedNumbers} handleResult={this.handleResult}/>
-                        <Answer  selectedNumbers={this.state.selectedNumbers}/>
+                        <Answer  selectedNumbers={this.state.ansNumber}/>
                     </div>
                     < br />
                     <Numbers selectedNumbers={this.state.selectedNumbers}
