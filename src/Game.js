@@ -8,9 +8,9 @@ class Game extends React.Component{
 state = {
     selectedNumbers:[],
     randomNoOfStar: 1+Math.floor(Math.random()*9),
-    ansNumber : []
+    ansNumber : [],
+    finalResult:''
 };
-//1+Math.floor(Math.random()*9)
 selectNumber = (clickNumber) =>{
     console.log(this.state.selectedNumbers.indexOf(clickNumber));
     if(this.state.selectedNumbers.indexOf(clickNumber) < 0)
@@ -37,6 +37,16 @@ selectNumber = (clickNumber) =>{
         }));
     }
 }
+
+handleRollBackAns = (clickNumber) =>{
+    console.log('unselect');
+    this.setState((prevState) =>({
+        selectedNumbers:prevState.selectedNumbers 
+                                        .filter(number => number != clickNumber),
+        ansNumber:prevState.ansNumber.filter(number => number != clickNumber)
+    }));
+
+}
     render() {
 
         return(
@@ -45,9 +55,10 @@ selectNumber = (clickNumber) =>{
                     <hr />
                     <div className="row">
                         <Stars noOfStar={this.state.randomNoOfStar}/>
-                        <Button selectedNumbers={this.state.selectedNumbers} handleResult={this.handleResult}/>
-                        <Answer  selectedNumbers={this.state.ansNumber}/>
+                        <Button ansNumber={this.state.ansNumber} handleResult={this.handleResult}/>
+                        <Answer  ansNumber={this.state.ansNumber} handleRollBackAns = {this.handleRollBackAns}/>
                     </div>
+                    <span>{this.state.finalResult}</span>
                     < br />
                     <Numbers selectedNumbers={this.state.selectedNumbers}
                     selectNumber={this.selectNumber}/>

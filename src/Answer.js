@@ -7,8 +7,8 @@ const Answer = (props) =>{
     
     return(
         <div className="col-5">
-            {props.selectedNumbers.map((number,i)=>
-            <span key={i}>{number}</span>
+            {props.ansNumber.map((number,i)=>
+            <span onClick={() => props.handleRollBackAns(number)} key={i}>{number}</span>
         )}
 
         </div>
